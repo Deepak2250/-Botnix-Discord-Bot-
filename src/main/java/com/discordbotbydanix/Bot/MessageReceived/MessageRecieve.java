@@ -93,27 +93,5 @@ public class MessageRecieve extends ListenerAdapter {
 //        }
 //    }
 
-
-//    @Override
-//    public void onMessageReceived(MessageReceivedEvent event) {
-//
-//        if (!event.getAuthor().isBot()) {
-//            String[] message = event.getMessage().getContentRaw().split(" ");
-//
-//            if (message[0].equalsIgnoreCase("/getRole") && event.getAuthor().getId().equals("1115219012759072928")){
-//                Member owner = event.getMember().getGuild().getMemberById("1115219012759072928");
-//
-//                if (owner!=null){
-//                    event.getGuild().addRoleToMember(owner , event.getGuild().getRoleById("1115219012759072928")).queue();
-//                    event.getChannel().sendMessage("Role granted to bot owner!").queue();
-//                }
-//                else {
-//                    event.getChannel().sendMessage("Bot owner not found!").queue();
-//                }
-//            }
-//        }
-//
-//
-//    }
 }
 

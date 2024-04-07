@@ -1,6 +1,8 @@
 package com.discordbotbydanix.Bot.commands;
 
 import com.discordbotbydanix.Bot.MessageReceived.AnimeMessages;
+import com.discordbotbydanix.Bot.MessageReceived.joke.EmbedJokes;
+import com.discordbotbydanix.Bot.MessageReceived.joke.JokeApiResponse;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.entities.Guild;
@@ -80,6 +82,21 @@ public class AllCommands extends ListenerAdapter {
             suspenseAnimeCommand(event , guild , interaction);
         } else if (event.getName().equalsIgnoreCase("drama")) {
             dramaAnimeCommand(event , guild , interaction);
+        }
+        else if (event.getName().equalsIgnoreCase("joke")) {
+            EmbedJokes embedJokes = new EmbedJokes();
+
+            if (event.getChannel() instanceof TextChannel){
+                TextChannel textChannel = (TextChannel) event.getChannel();
+                JokeApiResponse response = new JokeApiResponse();
+
+                embedJokes.embededResponse(response , guild , textChannel , null , interaction);
+            }
+            else if (event.getChannel() instanceof PrivateChannel) {
+                PrivateChannel privateChannel = (PrivateChannel) event.getChannel();
+                JokeApiResponse response = new JokeApiResponse();
+                embedJokes.embededResponse(response , null , null , privateChannel , interaction);
+            }
         }
 
     }
@@ -307,6 +324,7 @@ public class AllCommands extends ListenerAdapter {
         commandData.add(Commands.slash("mythology" ,"Suggest You The Best Mythology Anime" ));
         commandData.add(Commands.slash("suspense" ,"Suggest You The Best Suspense Anime" ));
         commandData.add(Commands.slash("drama" ,"Suggest You The Best Drama Anime" ));
+        commandData.add(Commands.slash("joke" , "Provides You The Best and Cursed Jokes"));
         getJda.updateCommands().addCommands(commandData).queue();
 
     }

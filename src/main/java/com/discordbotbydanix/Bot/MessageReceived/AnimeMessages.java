@@ -22,23 +22,6 @@ public class AnimeMessages extends ListenerAdapter {
     public void fetchAnimeDetails(String animeName, Guild guild, CommandInteraction interaction, PrivateChannel privateCahnnel, TextChannel textChannel) {
 
 
-//        try {
-//            String encodedAnimeName = URLEncoder.encode(animeName, StandardCharsets.UTF_8.toString());
-//            URL url = new URL("https://api.jikan.moe/v4/anime?q=" + encodedAnimeName);
-//            System.out.println(encodedAnimeName);
-//            HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
-//
-//            httpURLConnection.setRequestMethod("GET");
-//            int connectionResponse = httpURLConnection.getResponseCode();
-//            System.out.println(connectionResponse);
-//
-//            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(httpURLConnection.getInputStream()));
-//            StringBuilder stringBuilder = new StringBuilder();
-//            String line;
-//
-//            while ((line = bufferedReader.readLine()) != null) {
-//                stringBuilder.append(line);
-//            }
 
         try {
             String encodedAnimeName = URLEncoder.encode(animeName, StandardCharsets.UTF_8).toString();
@@ -56,145 +39,12 @@ public class AnimeMessages extends ListenerAdapter {
                 Gson gson = new Gson();
                 JsonObject jsonObject = gson.fromJson(responseBody, JsonObject.class);
                 processSpecificAnimeData(jsonObject, guild, interaction, privateCahnnel, textChannel);
-                System.out.println(url);
-                System.out.println(encodedAnimeName);
             }
         } catch (IOException e) {
             throw new RuntimeException("The Error is :" + e);
         }
 
 
-//            String synopsis = "Unknown";
-//            String image = null;
-//            String englishTitle = "Unknown";
-//            String airedDate = "Unknown";
-//            String episodes = "Unknown";
-//            String rating = "Unknown";
-//
-//
-//            Gson gson = new Gson();
-//            JsonObject jsonObject = gson.fromJson(stringBuilder.toString(), JsonObject.class);
-//
-//            if (!jsonObject.has("data") || !jsonObject.get("data").isJsonNull() || jsonObject.get("data").getAsJsonArray().size() == 0) {
-//                interaction.deferReply().complete();
-//                interaction.getHook().sendMessage("Sorry, no data available for the provided anime name.").queue();
-//                return;
-//            } else {
-//                JsonObject data = jsonObject.get("data").getAsJsonArray().get(0).getAsJsonObject();
-//
-//                /// Checking The synopsis
-//
-//                if (data.has("synopsis") && !data.get("synopsis").isJsonNull()) {
-//                    synopsis = data.get("synopsis").getAsString();
-//                }
-//
-//                /// Checking The Image is Null or Not
-//
-//                if (data.has("images") && !data.get("images").isJsonNull() && data.get("images").getAsJsonObject().has("jpg")) {
-//                    JsonObject jpgObject = data.get("images").getAsJsonObject().get("jpg").getAsJsonObject();
-//
-//                    if (jpgObject.has("image_url") && !jpgObject.get("image_url").isJsonNull()) {
-//                        image = jpgObject.get("image_url").getAsString();
-//                    }
-//                }
-//
-//                if (image == null) {
-//                    // Replace this with your default image URL or handle it as needed
-//                    image = "https://st2.depositphotos.com/2493575/5398/i/450/depositphotos_53989081-stock-photo-black-texture.jpg";
-//                }
-//
-//
-//                /// Checking For The Title
-//
-//                JsonArray titleArray = data.getAsJsonArray("titles");
-//
-//                for (JsonElement jsonElement : titleArray) {
-//                    JsonObject titleObject = jsonElement.getAsJsonObject();
-//
-//                    // Check if "type" property exists and is not null
-//                    if (titleObject.has("type") && !titleObject.get("type").isJsonNull()) {
-//                        String type = titleObject.get("type").getAsString();
-//
-//                        // Check if the title type is "English"
-//                        if (type.equals("English")) {
-//                            // Check if "title" property exists and is not null
-//                            if (titleObject.has("title") && !titleObject.get("title").isJsonNull()) {
-//                                englishTitle = titleObject.get("title").getAsString();
-//                                break;
-//                            }
-//                        }
-//                    }
-//                }
-//
-//                /// Checking For The Aired Date
-//
-//                if (data.has("aired") && !data.get("aired").isJsonNull()) {
-//                    JsonObject airedObject = data.getAsJsonObject("aired");
-//                    if (airedObject.has("from") && !airedObject.get("from").isJsonNull()) {
-//                        airedDate = airedObject.get("from").getAsString().substring(0, 10);
-//                    }
-//                }
-//
-//                /// Checking For The Episodes of the Anime That is Exist Or Not
-//
-//                if (data.has("episodes") && !data.get("episodes").isJsonNull()) {
-//                    episodes = data.get("episodes").getAsString();
-//                }
-//
-//                /// Checking The Rating String is Null Or Not
-//
-//                if (data.has("rating")) {
-//                    // Check if the "rating" property is not null
-//                    JsonElement ratingElement = data.get("rating");
-//                    if (!ratingElement.isJsonNull()) {
-//                        rating = ratingElement.getAsString();
-//                    }
-//                }
-//
-//
-//                /// Checking For the Genre
-//
-//                JsonArray genresArray = jsonObject.getAsJsonArray("data").get(0).getAsJsonObject().getAsJsonArray("genres");
-//                StringBuilder genreList = new StringBuilder();
-//                genreList.append("Unknown");
-//
-//                for (int i = 0; i < genresArray.size(); i++) {
-//                    String genre = genresArray.get(i).getAsJsonObject().get("name").getAsString();
-//
-//                    if (!genre.isEmpty()) {
-//                        genreList.append(genre);
-//
-//                        if (i < genresArray.size() - 1) {
-//                            genreList.append(", ");
-//                        }
-//                    }
-//                }
-//
-//
-//                // Checking For The Rank
-//
-//                String rank = "Unknown";
-//
-//                if (data.has("rank") && !data.get("rank").isJsonNull()) {
-//                    rank = data.get("rank").getAsString();
-//                }
-//
-//                /// Method To Show the Data To The Channels
-//
-//                sendAnimeDetailsEmbedToChannel(englishTitle, synopsis, image, airedDate, episodes, rating, genreList, rank, guild, interaction, textChannel, privateCahnnel);
-//
-//            }
-//
-//            bufferedReader.close();
-
-        // }
-//        catch (IOException e) {
-//            interaction.deferReply().complete();
-//            interaction.getHook().sendMessage("Sorry, the bot is currently offline.").queue();
-//            e.printStackTrace();
-//        }
-//
-//
     }
 
 
