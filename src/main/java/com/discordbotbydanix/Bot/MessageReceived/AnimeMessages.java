@@ -373,7 +373,7 @@ public class AnimeMessages extends ListenerAdapter {
 
     public void sendAnimeDetailsEmbedToChannel(String title, String synposis, String image, String airedDate, String source, String episodes, String rating, StringBuilder genreList, String rank, Guild guild, CommandInteraction interaction, TextChannel textChannel, PrivateChannel privateChannel) {
 
-        String baseUrl = "https://api.jikan.moe/v3/search/anime?q=";
+        String baseUrl = "https://myanimelist.net/anime.php?q=";
         String encodedTitle = URLEncoder.encode(title, StandardCharsets.UTF_8);
         String apiUrl = baseUrl + encodedTitle;
 
@@ -430,11 +430,15 @@ public class AnimeMessages extends ListenerAdapter {
 
     private void sendMangaDetailsEmbedToChannel(String title, String synposis, String image, String chapters, String volumes, String author, String mangaType, StringBuilder genreList, String rank, Guild guild, CommandInteraction interaction, TextChannel textChannel, PrivateChannel privateChannel) {
 
+        String baseUrl = "https://myanimelist.net/manga.php?q=";
+        String encodedTitle = URLEncoder.encode(title, StandardCharsets.UTF_8);
+        String apiUrl = baseUrl + encodedTitle;
+
         EmbedBuilder eb = new EmbedBuilder();
         eb.setTitle(title);
         eb.setDescription(synposis);
         eb.setThumbnail(image);
-        eb.setUrl("https://myanimelist.net/anime/16498/" + title.replaceAll(" ", "_"));
+        eb.setUrl(apiUrl);
         eb.addField("MangaType : ", mangaType, false);
         eb.addField("Chapters : ", chapters, false);
         eb.addField("Volumes : ", volumes, false);

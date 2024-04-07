@@ -60,43 +60,43 @@ public class AllCommands extends ListenerAdapter {
         } else if (event.getName().equalsIgnoreCase("sports")) {
             sportsAnimeCommand(event, guild, interaction);
         } else if (event.getName().equalsIgnoreCase("hentai")) {
-            hentaiAnimeCommand( interaction);
-        }
-        else if (event.getName().equalsIgnoreCase("botinfo")) {
+            hentaiAnimeCommand(interaction);
+        } else if (event.getName().equalsIgnoreCase("botinfo")) {
             botInfoCommand(event);
         } else if (event.getName().equalsIgnoreCase("sci-fi")) {
-            scifiAnimeCommand(event , guild , interaction);
+            scifiAnimeCommand(event, guild, interaction);
         } else if (event.getName().equalsIgnoreCase("psychological")) {
-            psychologicalAnimeCommand(event , guild , interaction);
+            psychologicalAnimeCommand(event, guild, interaction);
         } else if (event.getName().equalsIgnoreCase("school")) {
-            schoolAnimeCommand(event , guild , interaction);
+            schoolAnimeCommand(event, guild, interaction);
         } else if (event.getName().equalsIgnoreCase("shounen")) {
-            shounenAnimeCommand(event , guild , interaction);
+            shounenAnimeCommand(event, guild, interaction);
         } else if (event.getName().equalsIgnoreCase("time-travel")) {
-            timetravelAnimeCommand(event , guild , interaction);
+            timetravelAnimeCommand(event, guild, interaction);
         } else if (event.getName().equalsIgnoreCase("space")) {
-            spaceAnimeCommand(event , guild , interaction);
+            spaceAnimeCommand(event, guild, interaction);
         } else if (event.getName().equalsIgnoreCase("mythology")) {
-            mythalogyAnimeCommand(event , guild , interaction);
+            mythalogyAnimeCommand(event, guild, interaction);
         } else if (event.getName().equalsIgnoreCase("suspense")) {
-            suspenseAnimeCommand(event , guild , interaction);
+            suspenseAnimeCommand(event, guild, interaction);
         } else if (event.getName().equalsIgnoreCase("drama")) {
-            dramaAnimeCommand(event , guild , interaction);
-        }
-        else if (event.getName().equalsIgnoreCase("joke")) {
+            dramaAnimeCommand(event, guild, interaction);
+        } else if (event.getName().equalsIgnoreCase("joke")) {
             EmbedJokes embedJokes = new EmbedJokes();
 
-            if (event.getChannel() instanceof TextChannel){
+            if (event.getChannel() instanceof TextChannel) {
                 TextChannel textChannel = (TextChannel) event.getChannel();
                 JokeApiResponse response = new JokeApiResponse();
 
-                embedJokes.embededResponse(response , guild , textChannel , null , interaction);
-            }
-            else if (event.getChannel() instanceof PrivateChannel) {
+                embedJokes.embededResponse(response, guild, textChannel, null, interaction);
+            } else if (event.getChannel() instanceof PrivateChannel) {
                 PrivateChannel privateChannel = (PrivateChannel) event.getChannel();
                 JokeApiResponse response = new JokeApiResponse();
-                embedJokes.embededResponse(response , null , null , privateChannel , interaction);
+                embedJokes.embededResponse(response, null, null, privateChannel, interaction);
             }
+        }
+        else if (event.getName().equalsIgnoreCase("movies")) {
+            moviesCommand(event , guild , interaction);
         }
 
     }
@@ -217,6 +217,10 @@ public class AllCommands extends ListenerAdapter {
         checkingChannelAnime("https://api.jikan.moe/v4/anime?genres=8", event, guild, interaction);
     }
 
+    private void moviesCommand(SlashCommandInteractionEvent event, Guild guild, CommandInteraction interaction) {
+        checkingChannelAnime("https://api.jikan.moe/v4/top/anime?type=movie", event, guild, interaction);
+    }
+
     /// Owner
 
     private void ownerCommamd(SlashCommandInteractionEvent event) {
@@ -249,8 +253,7 @@ public class AllCommands extends ListenerAdapter {
                 embedBuilder1.setThumbnail("https://cdn.dribbble.com/users/678328/screenshots/2393089/media/aee866cbdfee26dc3ff1ebfd8d200249.gif");
                 event.replyEmbeds(embedBuilder1.build()).queue();
             }
-        }
-        else if (event.getChannel() instanceof PrivateChannel){
+        } else if (event.getChannel() instanceof PrivateChannel) {
             embedBuilder1.setTitle("Botnix");
             embedBuilder1.setDescription("Botnix Bot is your friendly companion for all things anime-related. Whether you're a seasoned otaku or just starting your anime journey, this bot is here to enhance your anime experience. With Botnix, you can quickly access information about your favorite anime series, characters, genres, and much more.");
             embedBuilder1.setThumbnail("https://cdn.dribbble.com/users/678328/screenshots/2393089/media/aee866cbdfee26dc3ff1ebfd8d200249.gif");
@@ -315,16 +318,17 @@ public class AllCommands extends ListenerAdapter {
         commandData.add(Commands.slash("sports", "Suggest You The Best Sports Anime"));
         commandData.add(Commands.slash("hentai", "Suggest You The Best Hentai Anime"));
         commandData.add(Commands.slash("botinfo", "The Info About Me "));
-        commandData.add(Commands.slash("sci-fi" , "Suggest You The Best Sci-Fi Anime"));
-        commandData.add(Commands.slash("psychological" ,"Suggest You The Best Psychological Anime" ));
-        commandData.add(Commands.slash("school" ,"Suggest You The Best School Anime" ));
-        commandData.add(Commands.slash("shounen" ,"Suggest You The Best Shounen Anime" ));
-        commandData.add(Commands.slash("time-travel" ,"Suggest You The Best Time Travel Anime" ));
-        commandData.add(Commands.slash("space" ,"Suggest You The Best Space Anime" ));
-        commandData.add(Commands.slash("mythology" ,"Suggest You The Best Mythology Anime" ));
-        commandData.add(Commands.slash("suspense" ,"Suggest You The Best Suspense Anime" ));
-        commandData.add(Commands.slash("drama" ,"Suggest You The Best Drama Anime" ));
-        commandData.add(Commands.slash("joke" , "Provides You The Best and Cursed Jokes"));
+        commandData.add(Commands.slash("sci-fi", "Suggest You The Best Sci-Fi Anime"));
+        commandData.add(Commands.slash("psychological", "Suggest You The Best Psychological Anime"));
+        commandData.add(Commands.slash("school", "Suggest You The Best School Anime"));
+        commandData.add(Commands.slash("shounen", "Suggest You The Best Shounen Anime"));
+        commandData.add(Commands.slash("time-travel", "Suggest You The Best Time Travel Anime"));
+        commandData.add(Commands.slash("space", "Suggest You The Best Space Anime"));
+        commandData.add(Commands.slash("mythology", "Suggest You The Best Mythology Anime"));
+        commandData.add(Commands.slash("suspense", "Suggest You The Best Suspense Anime"));
+        commandData.add(Commands.slash("drama", "Suggest You The Best Drama Anime"));
+        commandData.add(Commands.slash("joke", "Provides You The Best and Cursed Jokes"));
+        commandData.add(Commands.slash("movies", "Provide You The Movies Story"));
         getJda.updateCommands().addCommands(commandData).queue();
 
     }
